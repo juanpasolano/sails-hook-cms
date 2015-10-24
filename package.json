@@ -16,5 +16,8 @@
     "jade-async": "^1.1.7",
     "lodash": "^3.10.1",
     "moment": "^2.10.6"
+  },
+  "devDependencies": {
+    "sails": "^0.11.2"
   }
 }
