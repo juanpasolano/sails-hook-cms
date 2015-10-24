@@ -1,0 +1,21 @@
+mixin input(name, attr, type)
+  - type = type || 'text'
+  fieldset.form-group
+    label(for='#{name}') #{name}
+    input.form-control(type='#{type}', name="#{name}")
+      
+mixin select(name, attr, options)
+  fieldset.form-group
+    label(for='#{name}') #{name}
+    select.form-control(name="#{name}")
+      each item, index in options
+        option(value="#{item.value}") #{item.name}
+
+
+
+    
+case element
+  when 'input'
+    +input(name, attr, type)
+  when 'select'
+    +select(name, attr, options)
