@@ -15,7 +15,7 @@ var Sails = require('sails').Sails;
          Sails().lift({
            hooks: {
              // Load the hook
-             "your-hook-name": require('../'),
+             "admin-panel": require('../'),
              // Skip grunt (unless your hook uses it)
              "grunt": false
            },
