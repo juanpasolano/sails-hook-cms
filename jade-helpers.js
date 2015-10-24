@@ -24,9 +24,11 @@ module.exports = function(sails) {
       item: function(value, attrName, attrs){
         if(attrs.type == 'datetime' || attrs.type == 'date'){
           return moment(value).format('DD/MM/YYYY:hh-mm a');
-        }else if(attrs.type == 'integer' && attrs.model){
-          return value.name;
-        }else {
+        } else if(attrs.model){
+          return (value && value.name) ? value.name : '';
+        } else if(attrs.collection){
+          return (value.length) ? value.length : 0;
+        } else {
           return value;
         }
       }
@@ -34,7 +36,6 @@ module.exports = function(sails) {
     form: {
       getControl : function(name, attr){
         var jadeFormPartials = jade.compileFile(path.join(__dirname, 'partials/forms.jade'));
-
         if(attr.type == 'string'){
           if(attr.enum){
             return jadeFormPartials({
@@ -63,7 +64,6 @@ module.exports = function(sails) {
           var p = Promise.defer();
           if(sails.models[attr.model]){
             sails.models[attr.model].find().exec(function(err, models){
-              console.log(models);
               if(err) return p.resolve('error on model');
               p.resolve(jadeFormPartials({
                 element: 'select',

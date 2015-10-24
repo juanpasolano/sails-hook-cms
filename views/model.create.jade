@@ -3,10 +3,10 @@ extends ./layout.jade
 block content
   .row
     .col-md-6
-      h2 Create #{modelName}
+      h2.capitalize Create #{modelName}
   .row
     form(action="/admin/#{modelName}/store", method="POST").col-md-12
-      each attr, indexAttr in modelSchema
-        div !{helpers.form.getControl(indexAttr, attr)}
+      each attr, attrName in modelSchema
+        div !{helpers.form.getControl(attrName, attr)}
       
       button.btn.btn-primary(type="submit") Create

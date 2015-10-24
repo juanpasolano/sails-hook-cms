@@ -3,23 +3,24 @@ extends ./layout.jade
 block content
   .row
     .col-md-6
-      h2 #{modelName}
+      h2.capitalize #{modelName}
     .col-md-6
-      a.btn.btn-primary.pull-right(href="/admin/#{modelName}/create") New #{modelName}
+      a.btn.btn-primary.pull-right.capitalize(href="/admin/#{modelName}/create") Add #{modelName}
+  hr
   .row
     .col-md-12
-      table.table
-        thead
+      table.table.table-striped.table-hover
+        thead.thead-default
           tr
             each attrs, attrName in modelSchema
-              th #{attrName}
+              th.capitalize #{attrName}
             th Actions
         tbody
           each item, indexItem in models
             tr
               each attrs, attrName in modelSchema
                 td #{helpers.list.item(item[attrName], attrName, attrs)}
-              td   
-                button.btn.btn-primary.btn-sm Edit
+              td(style="width: 145px;")   
+                button.btn.btn-primary-outline.btn-sm Edit
                 | &nbsp;
-                a.btn.btn-danger.btn-sm(href="/admin/#{modelName}/delete/#{item.id}") Delete
+                a.btn.btn-danger-outline.btn-sm(href="/admin/#{modelName}/delete/#{item.id}",  onclick="return confirm('Are you sure?')") Delete

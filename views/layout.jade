@@ -1,26 +1,30 @@
-<!DOCTYPE html>
+doctype html
 html(lang="en")
 head
   meta(charset="UTF-8")
   title Admin
   link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.min.css")
+  //- link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css")
+  style.
+    .capitalize {
+      text-transform: capitalize;
+    }
 body
-  .container-fluid
-    nav.navbar.navbar-dark.bg-inverse
-      button.navbar-toggler.hidden-sm-up(type='button', data-toggle='collapse', data-target='#navMenu') &#9776;
-      #navMenu.collapse.navbar-toggleable-xs
-        a.navbar-brand(href='#') SSCMS
-        ul.nav.navbar-nav
-          each model, index in sails.models
-            li.nav-item
-              a.nav-link(href='/admin/#{index}') #{index}
-        //- form.form-inline.navbar-form.pull-right
-          input.form-control(type='text', placeholder='Search')
-          button.btn.btn-success-outline(type='submit') Search
-      
-        
-  .container-fluid(style="margin-top:20px")
+  nav.navbar.navbar-dark.bg-inverse.navbar-fixed-top
+    button.navbar-toggler.hidden-sm-up(type='button', data-toggle='collapse', data-target='#navMenu') &#9776;
+    #navMenu.collapse.navbar-toggleable-xs
+      a.navbar-brand(href='/admin') SSCMS
+      ul.nav.navbar-nav
+        each model, index in sails.models
+          li.nav-item
+            a.nav-link.capitalize(href='/admin/#{index}') #{index}
+      //- form.form-inline.navbar-form.pull-right
+        input.form-control(type='text', placeholder='Search')
+        button.btn.btn-success-outline(type='submit') Search
+
+
+  .container-fluid(style="margin-top:74px")
     block content
-  
+
   script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js")
   script(src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/js/bootstrap.min.js")
