@@ -4,9 +4,9 @@
   "description": "A simple sails admin panel",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha -R spec"
   },
-  "author": "Juan Solano",
+  "author": "Juan P Solano <juanpa_solano@hotmail.com> (http://juanpasolano.com)",
   "license": "ISC",
   "sails": {
     "isHook": true
@@ -19,5 +19,19 @@
   },
   "devDependencies": {
     "sails": "^0.11.2"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/juanpasolano/sails-hook-admin-panel.git"
+  },
+  "keywords": [
+    "sails"
+  ],
+  "bugs": {
+    "url": "https://github.com/juanpasolano/sails-hook-admin-panel/issues"
+  },
+  "homepage": "https://github.com/juanpasolano/sails-hook-admin-panel#readme"
 }
