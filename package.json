@@ -1,13 +1,13 @@
 {
-  "name": "sails-hook-admin-panel",
-  "version": "0.0.2",
+  "name": "sails-hook-cms",
+  "version": "0.0.3",
   "description": "A simple sails admin panel",
   "main": "index.js",
   "scripts": {
     "test": "mocha -R spec"
   },
   "author": "Juan P Solano <juanpa_solano@hotmail.com> (http://juanpasolano.com)",
-  "license": "ISC",
+  "license": "MIT",
   "sails": {
     "isHook": true
   },
