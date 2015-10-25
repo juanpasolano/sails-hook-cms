@@ -7,6 +7,6 @@ block content
   .row
     form(action="/admin/#{modelName}/store", method="POST").col-md-12
       each attr, attrName in modelSchema
-        div !{helpers.form.getControl(attrName, attr)}
+        div !{helpers.form.getElement(attrName, attr)}
       
       button.btn.btn-primary(type="submit") Create

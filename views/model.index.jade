@@ -3,7 +3,8 @@ extends ./layout.jade
 block content
   .row
     .col-md-6
-      h2.capitalize #{modelName}
+      h2.capitalize #{modelName} 
+        small #{models.length}
     .col-md-6
       a.btn.btn-primary.pull-right.capitalize(href="/admin/#{modelName}/create") Add #{modelName}
   hr
@@ -21,6 +22,6 @@ block content
               each attrs, attrName in modelSchema
                 td #{helpers.list.item(item[attrName], attrName, attrs)}
               td(style="width: 145px;")   
-                button.btn.btn-primary-outline.btn-sm Edit
+                a.btn.btn-primary-outline.btn-sm(href="/admin/#{modelName}/edit/#{item.id}") Edit
                 | &nbsp;
                 a.btn.btn-danger-outline.btn-sm(href="/admin/#{modelName}/delete/#{item.id}",  onclick="return confirm('Are you sure?')") Delete

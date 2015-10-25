@@ -1,4 +1,15 @@
 extends ./layout.jade
 
 block content
-  h1 This is the home of the admin
+  .jumbotron
+    .container
+      h1 Wellcome to Sails CMS
+      p This is a simple out of the box CMS for you sails app. If you see any bugs or want to contribute go to the <a href="https://github.com/juanpasolano/sails-hook-cms">github page</a>
+  //-.row
+    .col-md-4
+      h2 models
+      p There are #{Object.keys(sails.models).length} models on your app;
+      p you can chek this runing <code>sails.models</code>
+      p= sails.models
+    .col-md-4
+    .col-md-4

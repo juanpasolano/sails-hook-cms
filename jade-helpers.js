@@ -34,7 +34,7 @@ module.exports = function(sails) {
       }
     },
     form: {
-      getControl : function(name, attr){
+      getElement : function(name, attr, value){
         var jadeFormPartials = jade.compileFile(path.join(__dirname, 'partials/forms.jade'));
         if(attr.type == 'string'){
           if(attr.enum){
@@ -42,13 +42,15 @@ module.exports = function(sails) {
               element: 'select',
               name: name,
               attr: attr,
+              value: value,
               options: enumAsOptions(attr.enum)
             });
           } else {
             return jadeFormPartials({
               element: 'input',
               name: name,
-              attr: attr
+              attr: attr,
+              value: value
             });
           }
 
@@ -57,10 +59,11 @@ module.exports = function(sails) {
             element: 'input',
             type: 'number',
             name: name,
-            attr: attr
+            attr: attr,
+            value: value
           });
 
-        } else if(attr.type == 'integer' && attr.model) {
+        } else if(attr.model) {
           var p = Promise.defer();
           if(sails.models[attr.model]){
             sails.models[attr.model].find().exec(function(err, models){
@@ -68,7 +71,8 @@ module.exports = function(sails) {
               p.resolve(jadeFormPartials({
                 element: 'select',
                 name: name,
-                options: modelsAsOptions(models)
+                options: modelsAsOptions(models),
+                value: value
               }));
             });
           }else {

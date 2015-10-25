@@ -15,7 +15,7 @@ module.exports = function (sails) {
   };
   return {
     initialize: function(cb) {
-      console.log('admin-hook:initialize');
+      console.log('sails-hook-cms:initialize');
       jadeLocals.sails = sails;
       jadeLocals.helpers = jadeHelpers(sails);
       return cb();
@@ -34,12 +34,6 @@ module.exports = function (sails) {
         'GET /admin/:model': function (req, res, next) {
           if(req.params.model && sails.models[req.params.model]){
             var modelSchema = sails.models[req.params.model]._attributes;
-            // console.log(sails.models[req.params.model]._attributes);
-            // console.log('------');
-            // console.log(sails.models[req.params.model]._validator.validations);
-            // console.log(sails.models[req.params.model].waterline.collections[req.params.model]._attributes);
-            // console.log(modelSchema.waterline.collections[req.params.model]._validator);
-            // console.log(util.inspect(modelSchema.waterline.collections[req.params.model], {showHidden: true, depth: null}));
 
             //Find all models
             sails.models[req.params.model].find().populateAll().exec(function(err, models){
@@ -88,10 +82,48 @@ module.exports = function (sails) {
           }
         },
 
+        'GET /admin/:model/edit/:modelId': function(req, res, next){
+          if(req.params.modelId && req.params.model && sails.models[req.params.model]){
+
+            var modelSchema = _.clone(sails.models[req.params.model]._attributes);
+            delete modelSchema.id;
+            delete modelSchema.createdAt;
+            delete modelSchema.updatedAt;
+
+            //FindOne model
+            sails.models[req.params.model]
+            .findOne(req.params.modelId)
+            .exec(function(err, model){
+              if(err) return res.negotiate(err);
+              var jadeFn = jadeAsync.compileFile(path.join(__dirname, 'views/model.edit.jade'));
+              jadeFn(extendJadeLocals({
+                modelName: req.params.model,
+                modelSchema: modelSchema,
+                model:model
+              })).done(function (html) {
+                return res.send(html);
+              });
+            });
+          } else {
+            return next();
+          }
+        },
+
         'POST /admin/:model/store': function(req, res, next){
           if(req.params.model && sails.models[req.params.model]){
             req.body = _.pick(req.body, _.identity); //Cleans req.body from empty attrs or _.omit(sourceObj, _.isUndefined) <- allows false, null, 0
             sails.models[req.params.model].create(req.body).exec(function(err, model){
+              if(err) return res.negotiate(err);
+              return res.redirect('/admin/' + req.params.model);
+            });
+          } else {
+            return next();
+          }
+        },
+        'POST /admin/:model/update/:modelId': function(req, res, next){
+          if(req.params.model && sails.models[req.params.model]){
+            req.body = _.pick(req.body, _.identity); //Cleans req.body from empty attrs or _.omit(sourceObj, _.isUndefined) <- allows false, null, 0
+            sails.models[req.params.model].update(req.params.modelId, req.body).exec(function(err, model){
               if(err) return res.negotiate(err);
               return res.redirect('/admin/' + req.params.model);
             });
