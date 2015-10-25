@@ -25,13 +25,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/juanpasolano/sails-hook-admin-panel.git"
+    "url": "git+https://github.com/juanpasolano/sails-hook-cms.git"
   },
   "keywords": [
     "sails"
   ],
   "bugs": {
-    "url": "https://github.com/juanpasolano/sails-hook-admin-panel/issues"
+    "url": "https://github.com/juanpasolano/sails-hook-cms/issues"
   },
-  "homepage": "https://github.com/juanpasolano/sails-hook-admin-panel#readme"
+  "homepage": "https://github.com/juanpasolano/sails-hook-cms#readme"
 }
