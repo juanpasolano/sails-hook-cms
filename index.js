@@ -18,6 +18,7 @@ module.exports = function (sails) {
       console.log('sails-hook-cms:initialize');
       jadeLocals.sails = sails;
       jadeLocals.helpers = jadeHelpers(sails);
+      jadeLocals._ = _;
       return cb();
     },
     routes: {
@@ -61,13 +62,15 @@ module.exports = function (sails) {
             delete modelSchema.createdAt;
             delete modelSchema.updatedAt;
 
-            //Using the sync methods
-            // var jadeFn = jade.compileFile(path.join(__dirname, 'views/model.create.jade'));
-            // var html = jadeFn(extendJadeLocals({
-            //   modelName: req.params.model,
-            //   modelSchema: modelSchema
-            // }));
-            // return res.send(html);
+
+            // if(_.isEmpty(modelSchema)){
+            //   jadeFn(extendJadeLocals({
+            //     modelName: req.params.model,
+            //     modelSchema: modelSchema
+            //   })).done(function (html) {
+            //     return res.send(html);
+            //   });
+            // }
 
             //Using the async thing
             var jadeFn = jadeAsync.compileFile(path.join(__dirname, 'views/model.create.jade'));
@@ -121,6 +124,7 @@ module.exports = function (sails) {
           }
         },
         'POST /admin/:model/update/:modelId': function(req, res, next){
+          console.log(req.body);
           if(req.params.model && sails.models[req.params.model]){
             req.body = _.pick(req.body, _.identity); //Cleans req.body from empty attrs or _.omit(sourceObj, _.isUndefined) <- allows false, null, 0
             sails.models[req.params.model].update(req.params.modelId, req.body).exec(function(err, model){

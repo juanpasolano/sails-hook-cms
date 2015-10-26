@@ -36,6 +36,8 @@ module.exports = function(sails) {
     form: {
       getElement : function(name, attr, value){
         var jadeFormPartials = jade.compileFile(path.join(__dirname, 'partials/forms.jade'));
+
+        //If is STRING
         if(attr.type == 'string'){
           if(attr.enum){
             return jadeFormPartials({
@@ -54,6 +56,26 @@ module.exports = function(sails) {
             });
           }
 
+          //if is DATE or DATETIME
+        } else if(attr.type == 'date' || attr.type == 'datetime') {
+          return jadeFormPartials({
+            element: 'input',
+            type: 'date',
+            name: name,
+            attr: attr,
+            value: value
+          });
+
+          //if is BOOLEAN
+        } else if(attr.type == 'boolean') {
+          return jadeFormPartials({
+            element: 'checkbox',
+            name: name,
+            attr: attr,
+            value: value
+          });
+
+          // If is FLOAT or NUMBER
         } else if((attr.type == 'integer' || attr.type == 'float') && !attr.model) {
           return jadeFormPartials({
             element: 'input',
@@ -63,6 +85,7 @@ module.exports = function(sails) {
             value: value
           });
 
+          // If is a RELATION
         } else if(attr.model) {
           var p = Promise.defer();
           if(sails.models[attr.model]){

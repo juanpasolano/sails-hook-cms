@@ -2,7 +2,14 @@ mixin input(name, attr, type, value)
   - type = type || 'text'
   fieldset.form-group
     label.capitalize(for='#{name}') #{name}
-    input.form-control(type='#{type}', name="#{name}", required=(attr.required ? "required" : undefined), value=(value ? value : ''))
+    input.form-control(
+      type='#{type}', 
+      name="#{name}", 
+      value=(value ? value : '')
+      required=(attr.required ? "required" : undefined), 
+      
+      step=(attr.type === 'float'? "any" : undefined)
+    )
       
 mixin select(name, attr, options, value)
   fieldset.form-group
@@ -12,9 +19,16 @@ mixin select(name, attr, options, value)
       each item, index in options
         option(value="#{item.value}", selected=(item.value === value) ? "selected" : undefined) #{item.name}
 
+mixin checkbox(name, attr, value)
+  .checkbox
+    label
+      input(type='checkbox', name="#{name}", checked=(value)? "checked" : undefined)
+      |  #{name}
     
 case element
   when 'input'
     +input(name, attr, type, value)
   when 'select'
     +select(name, attr, options, value)
+  when 'checkbox'
+    +checkbox(name, attr, value)
