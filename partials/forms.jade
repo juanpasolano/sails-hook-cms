@@ -22,7 +22,7 @@ mixin select(name, attr, options, value)
 mixin checkbox(name, attr, value)
   .checkbox
     label
-      input(type='checkbox', name="#{name}", checked=(value)? "checked" : undefined)
+      input(type='checkbox', name="#{name}", checked=(value)? "checked" : undefined, value="true")
       |  #{name}
     
 case element
