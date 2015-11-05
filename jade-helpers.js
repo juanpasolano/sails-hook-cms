@@ -22,14 +22,18 @@ module.exports = function(sails) {
   return {
     list: {
       item: function(value, attrName, attrs){
-        if(attrs.type == 'datetime' || attrs.type == 'date'){
+        if(attrs.type == 'datetime' ){
           return moment(value).format('DD/MM/YYYY:hh-mm a');
+        } else if(attrs.type == 'date'){
+          return moment(value).format('DD/MM/YYYY');
+        } else if(attrs.collection){
         } else if(attrs.model){
           return (value && value.name) ? value.name : '';
         } else if(attrs.collection){
           return (value.length) ? value.length : 0;
         } else {
           return value;
+
         }
       }
     },
@@ -59,8 +63,7 @@ module.exports = function(sails) {
           //if is DATE or DATETIME
         } else if(attr.type == 'date' || attr.type == 'datetime') {
           return jadeFormPartials({
-            element: 'input',
-            type: 'date',
+            element: attr.type,
             name: name,
             attr: attr,
             value: value

@@ -19,6 +19,16 @@ module.exports = function (sails) {
       jadeLocals.sails = sails;
       jadeLocals.helpers = jadeHelpers(sails);
       jadeLocals._ = _;
+      //This adds the validation function cms as [model].type = cms = function(){}
+      //This is to prevent
+      for (var key in sails.models) {
+        if (sails.models.hasOwnProperty(key)) {
+          if(!sails.models[key].types) sails.models[key].types = {};
+          sails.models[key].types.cms= function(){
+            return true;
+          };
+        }
+      }
       return cb();
     },
     routes: {
@@ -34,18 +44,19 @@ module.exports = function (sails) {
 
         'GET /admin/:model': function (req, res, next) {
           if(req.params.model && sails.models[req.params.model]){
-            var modelSchema = sails.models[req.params.model]._attributes;
-
+            model = sails.models[req.params.model];
+            var modelSchema = model._attributes;
             //Find all models
-            sails.models[req.params.model].find().populateAll().exec(function(err, models){
+            model.find().populateAll().exec(function(err, models){
               if(err) return res.negotiate(err);
               var jadeFn = jade.compileFile(path.join(__dirname, 'views/model.index.jade'));
               var html = jadeFn(extendJadeLocals({
                 modelName: req.params.model,
                 modelSchema: modelSchema,
+                cms: model.cms || {},
                 models: models
               }));
-              return res.send(html);
+              return res.ok(html);
             });
 
           } else {
@@ -61,16 +72,6 @@ module.exports = function (sails) {
             delete modelSchema.id;
             delete modelSchema.createdAt;
             delete modelSchema.updatedAt;
-
-
-            // if(_.isEmpty(modelSchema)){
-            //   jadeFn(extendJadeLocals({
-            //     modelName: req.params.model,
-            //     modelSchema: modelSchema
-            //   })).done(function (html) {
-            //     return res.send(html);
-            //   });
-            // }
 
             //Using the async thing
             var jadeFn = jadeAsync.compileFile(path.join(__dirname, 'views/model.create.jade'));
@@ -113,6 +114,7 @@ module.exports = function (sails) {
         },
 
         'POST /admin/:model/store': function(req, res, next){
+          console.log(req.body);
           if(req.params.model && sails.models[req.params.model]){
             req.body = _.pick(req.body, _.identity); //Cleans req.body from empty attrs or _.omit(sourceObj, _.isUndefined) <- allows false, null, 0
             sails.models[req.params.model].create(req.body).exec(function(err, model){

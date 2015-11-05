@@ -5,8 +5,9 @@ block content
     .col-md-6
       h2.text-capitalize Edit #{modelName}
   .row
-    form(action="/admin/#{modelName}/update/#{model.id}", method="POST").col-md-12
-      each attr, attrName in modelSchema
-        div !{helpers.form.getElement(attrName, attr, model[attrName])}
-      
-      button.btn.btn-primary(type="submit") Save
+    .col-md-8.col-centered
+      form(action="/admin/#{modelName}/update/#{model.id}", method="POST")
+        each attr, attrName in modelSchema
+          div !{helpers.form.getElement(attrName, attr, model[attrName])}
+        
+        button.btn.btn-primary(type="submit") Save

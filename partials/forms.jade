@@ -24,10 +24,30 @@ mixin checkbox(name, attr, value)
     label
       input(type='checkbox', name="#{name}", checked=(value)? "checked" : undefined, value="true")
       |  #{name}
+      
+mixin datetime(name, attr, value)
+  .form-group
+    label #{name}
+    .input-group.date()
+      input.form-control(type='text', date-time-picker="", name="#{name}")
+      span.input-group-addon
+        span.glyphicon.glyphicon-calendar
+          
+mixin date(name, attr, value)
+  .form-group
+    label #{name}
+    .input-group.date()
+      input.form-control(type='text', date-time="", name="#{name}")
+      span.input-group-addon
+        span.glyphicon.glyphicon-calendar
     
 case element
   when 'input'
     +input(name, attr, type, value)
+  when 'datetime'
+    +datetime(name, attr, value)
+  when 'date'
+    +date(name, attr, value)
   when 'select'
     +select(name, attr, options, value)
   when 'checkbox'
