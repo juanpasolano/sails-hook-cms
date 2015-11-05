@@ -1,7 +1,7 @@
 # Sails admin panel
 >Beaware: This hook is still in a very early stage and is still in very active development.
 
-##Why
+## Why
 
 The objective of this sails hook is to provide an easy way to create a simple CMS for your model's collections.  
 The hook reads the models schema to build simple CRUD operations and UI CMS.
@@ -9,14 +9,14 @@ The hook reads the models schema to build simple CRUD operations and UI CMS.
 ## Installation
 Install using `npm i sails-hook-cms` and then navigate to `http://localhost:1337/admin`
 
-##Routes
+## Routes
 This hooks introduces a couple of routes to your application.
 - `http://localhost:1337/admin` or home
 - `http://localhost:1337/admin/:model` A list of items
 - `http://localhost:1337/admin/:model/create` The form to create a new item
 - `http://localhost:1337/admin/:model/edit/:modelId` The form to edit an item
 
-##Options
+## Options
 I want this hook to work as plug and play. However if you want more control over the CMS I want to be able to provide those configurations to set things up.
 I decided not to make a `config/cms.js` file yet since I think the model declaration could serve better for grain control configuraitons.
 
@@ -49,6 +49,6 @@ module.exports = {
   }
 };
 ```
-##Intentions
+## Intentions
 I would like to have a minimal API but still have a decent flexibility.
 Any suggestions are welcome on the issues page. 
