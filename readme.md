@@ -52,5 +52,5 @@ module.exports = {
 };
 ```
 ## Intentions
-I would like to have a minimal API but still have a decent flexibility.
-Any suggestions are welcome on the issues page. 
+I would like to have a minimal API but still have a decent flexibility.  
+Any suggestions are welcome on the [issues](https://github.com/juanpasolano/sails-hook-cms/issues) page or in the [gitter chat room](https://gitter.im/juanpasolano/sails-hook-cms). 
