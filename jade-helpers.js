@@ -3,6 +3,7 @@ var jade = require('jade');
 var path = require('path');
 var _ = require('lodash');
 var moment =  require('moment');
+if (!Promise) var Promise = require('q');
 
 
 module.exports = function(sails) {

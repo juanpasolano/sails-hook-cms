@@ -1,49 +1,49 @@
 doctype html
 html(lang="en")
-head
-  meta(charset="UTF-8")
-  title Admin
-  //-google fonts
-  link(href='https://fonts.googleapis.com/css?family=Open+Sans:400,300', rel='stylesheet', type='text/css')
-  //-bootstrap
-  link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css")
-  //-bootstrap-datepicker
-  link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css")
-    
-  style.
-    html, body {
-      font-family: 'Open Sans', sans-serif;
-    }
-body
+  head
+    meta(charset="UTF-8")
+    title Admin
+    //-google fonts
+    link(href='https://fonts.googleapis.com/css?family=Open+Sans:400,300', rel='stylesheet', type='text/css')
+    //-bootstrap
+    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css")
+    //-bootstrap-datepicker
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css")
 
-  nav.navbar.navbar-default
-      .container-fluid
-        .navbar-header
-          a.navbar-brand(href='#')
-            img(alt='Brand', src='...')
-        #bs-example-navbar-collapse-1
-          //-.collapse.navbar-collapse
-          ul.nav.navbar-nav
-            each model, index in sails.models
-              li.nav-item
-                - var title = (model.cms && model.cms.label) ? model.cms.label : index; 
-                a.nav-link.text-capitalize(href='/admin/#{index}') #{title}
-  .container
-    block content
+    style.
+      html, body {
+        font-family: 'Open Sans', sans-serif;
+      }
+  body
 
-  script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js")
-  //-moment
-  script(src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js")
-  //-bootstrap
-  script(src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js")
-  //-bootstrap-datepicker
-  script(src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js")
-    
-  //-script
-  script(type='text/javascript').
-    $(document).ready(function(){
-      $('[date-time-picker]').datetimepicker({format:'YYYY-MM-DD hh:mm:ss'});
-      $('[date-time]').datetimepicker({format:'YYYY-MM-DD'});
-    });
-    
-  block scripts
+    nav.navbar.navbar-default
+        .container-fluid
+          .navbar-header
+            a.navbar-brand(href='#')
+              img(alt='Brand', src='...')
+          #bs-example-navbar-collapse-1
+            //-.collapse.navbar-collapse
+            ul.nav.navbar-nav
+              each model, index in sails.models
+                li.nav-item
+                  - var title = (model.cms && model.cms.label) ? model.cms.label : index;
+                  a.nav-link.text-capitalize(href='/admin/#{index}') #{title}
+    .container
+      block content
+
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js")
+    //-moment
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js")
+    //-bootstrap
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js")
+    //-bootstrap-datepicker
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js")
+
+    //-script
+    script(type='text/javascript').
+      $(document).ready(function(){
+        $('[date-time-picker]').datetimepicker({format:'YYYY-MM-DD hh:mm:ss'});
+        $('[date-time]').datetimepicker({format:'YYYY-MM-DD'});
+      });
+
+    block scripts
