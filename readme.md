@@ -1,7 +1,7 @@
 # Sails admin panel
 
 [![Join the chat at https://gitter.im/juanpasolano/sails-hook-cms](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/juanpasolano/sails-hook-cms?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
->Beaware: This hook is still in a very early stage and not in a very active development. Try ng-admin
+>Beaware: This hook is still in a very early stage and not in a very active development.
 
 ## Why
 
