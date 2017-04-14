@@ -30,8 +30,8 @@ block content
                 if cms && cms[attrName] !== false
                   td #{helpers.list.item(item[attrName], attrName, attrs)}
               td(style="width: 145px;")   
-                a.btn.btn-primary-outline.btn-sm(href="/admin/#{modelName}/edit/#{item.id}") Edit
+                a.btn.btn-primary-outline.btn-sm(href="/admin/#{modelName}/edit/#{item[primaryKey]}") Edit
                 | &nbsp;
-                a.btn.btn-danger-outline.btn-sm(href="/admin/#{modelName}/delete/#{item.id}",  onclick="return confirm('Are you sure?')") Delete
+                a.btn.btn-danger-outline.btn-sm(href="/admin/#{modelName}/delete/#{item[primaryKey]}",  onclick="return confirm('Are you sure?')") Delete
     //-.col-md-4
       +model-create-form
