@@ -10,6 +10,14 @@ mixin input(name, attr, type, value)
       
       step=(attr.type === 'float'? "any" : undefined)
     )
+
+mixin textarea(name, attr, value) 
+  fieldset.form-group
+    label.capitalize(for='#{name}') #{name}
+    textarea.form-control(       
+      name="#{name}",       
+      required=(attr.required ? "required" : undefined)         
+    )=(value ? value : '')
       
 mixin select(name, attr, options, value)
   fieldset.form-group
@@ -44,6 +52,8 @@ mixin date(name, attr, value)
 case element
   when 'input'
     +input(name, attr, type, value)
+  when 'textarea'
+    +textarea(name, attr, value)
   when 'datetime'
     +datetime(name, attr, value)
   when 'date'
