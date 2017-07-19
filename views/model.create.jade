@@ -8,7 +8,7 @@ mixin model-create-form
         p.text-warning It appears that your #{modelName} schema is empty. Please specify some attributes.
         p For more information refer to the <a href="http://sailsjs.org/documentation/concepts/models-and-orm/attributes">sails documentation on Model's attributes.</a>
       else
-        form(action="/admin/#{modelName}/store", method="POST")
+        form(action="/admin/#{modelName}/store", method="POST", id="model-form" )
           each attr, attrName in modelSchema
             div !{helpers.form.getElement(attrName, attr)}
           

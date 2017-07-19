@@ -54,7 +54,8 @@ module.exports = function (sails) {
                 modelName: req.params.model,
                 modelSchema: modelSchema,
                 cms: model.cms || {},
-                models: models
+                models: models,
+                primaryKey: model.primaryKey
               }));
               return res.ok(html);
             });
@@ -95,15 +96,17 @@ module.exports = function (sails) {
             delete modelSchema.updatedAt;
 
             //FindOne model
-            sails.models[req.params.model]
+            model = sails.models[req.params.model]
+            model
             .findOne(req.params.modelId)
-            .exec(function(err, model){
-              if(err) return res.negotiate(err);
+            .exec(function(err, item){
+              if(err || (item == undefined)) return res.negotiate(err);
               var jadeFn = jadeAsync.compileFile(path.join(__dirname, 'views/model.edit.jade'));
               jadeFn(extendJadeLocals({
                 modelName: req.params.model,
                 modelSchema: modelSchema,
-                model:model
+                item:item,
+                primaryKey:model.primaryKey
               })).done(function (html) {
                 return res.send(html);
               });
@@ -144,7 +147,7 @@ module.exports = function (sails) {
 
             //FindOne model
             sails.models[req.params.model]
-            .destroy(parseInt(req.params.modelId, 10))
+            .destroy(req.params.modelId)
             .exec(function(err, model){
               if(err) return res.negotiate(err);
               return res.redirect('/admin/' + req.params.model);

@@ -60,7 +60,16 @@ module.exports = function(sails) {
               value: value
             });
           }
+          //if is LONGTEXT or MEDIUMTEXT or TEXT
+        } else if(attr.type == 'longtext' || attr.type == 'mediumtext' || attr.type == 'text') {
+          return jadeFormPartials({
+              element: 'textarea',
+              name: name,
+              attr: attr,
+              value: value
+          });
 
+        
           //if is DATE or DATETIME
         } else if(attr.type == 'date' || attr.type == 'datetime') {
           return jadeFormPartials({
