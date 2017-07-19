@@ -17,7 +17,7 @@ mixin textarea(name, attr, value)
     textarea.form-control(       
       name="#{name}",       
       required=(attr.required ? "required" : undefined)         
-    )=(value ? value : '')
+    )=value
       
 mixin select(name, attr, options, value)
   fieldset.form-group

@@ -65,7 +65,8 @@ module.exports = function(sails) {
           return jadeFormPartials({
               element: 'textarea',
               name: name,
-              attr: attr
+              attr: attr,
+              value: value
           });
 
         
