@@ -27,7 +27,7 @@ In this case we have overrided the model.name with a label *Libro* and removed t
 
 ```
 module.exports = {
-  //Setting this variable will tell the gook how to render
+  //Setting this variable will tell the hook how to render
   cms: {
     //You can override the model name with label
     label: "Libro", 
